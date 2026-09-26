@@ -20,10 +20,22 @@
       "type": "string",
       "enum": [
         "CONSENT_RECORDED",
+        "CONSENT_WITHDRAWN",
+        "STAFF_REGISTERED",
+        "VENUE_REGISTERED",
+        "DEVICE_STATUS_REPORTED",
         "PROFILE_APPROVED",
+        "BASELINE_SET",
+        "CASE_OPENED",
+        "SESSION_BOOKED",
+        "SUMMARY_ACCEPTED",
+        "SUMMARY_QUARANTINED",
+        "DECISION_RECORDED",
+        "TRAINING_PAUSED",
+        "TRAINING_RESUMED",
         "SESSION_HELD",
-        "REVIEW_SIGNED",
-        "FOLLOWUP_DUE"
+        "FOLLOWUP_DUE",
+        "REVIEW_SIGNED"
       ]
     },
     "aggregate_type": {
@@ -31,7 +43,11 @@
       "enum": [
         "patient_consent",
         "device_profile",
+        "training_baseline",
         "training_case",
+        "training_session",
+        "venue_profile",
+        "staff_roster",
         "safety_review"
       ]
     },
@@ -52,13 +68,74 @@
     }
   },
   "payload_required_by_event": {
+    "CONSENT_WITHDRAWN": [
+      "requested_by"
+    ],
+    "STAFF_REGISTERED": [
+      "role"
+    ],
+    "VENUE_REGISTERED": [
+      "capacity",
+      "condition"
+    ],
+    "DEVICE_STATUS_REPORTED": [
+      "device_revision",
+      "decoder_version",
+      "reporter_id"
+    ],
     "PROFILE_APPROVED": [
       "device_revision",
       "reviewer_id"
     ],
+    "BASELINE_SET": [
+      "baseline_version",
+      "therapist_id"
+    ],
+    "CASE_OPENED": [
+      "patient_id",
+      "device_revision",
+      "decoder_version",
+      "baseline_version"
+    ],
+    "SESSION_BOOKED": [
+      "case_id",
+      "therapist_id",
+      "venue_id",
+      "start",
+      "end"
+    ],
+    "SUMMARY_ACCEPTED": [
+      "session_id",
+      "decoder_version",
+      "fingerprint"
+    ],
+    "SUMMARY_QUARANTINED": [
+      "session_id",
+      "decoder_version",
+      "fingerprint",
+      "reason"
+    ],
+    "DECISION_RECORDED": [
+      "session_id",
+      "decision",
+      "evaluator_id"
+    ],
+    "TRAINING_PAUSED": [
+      "reason",
+      "paused_by"
+    ],
+    "TRAINING_RESUMED": [
+      "confirmed_by",
+      "conclusion"
+    ],
     "SESSION_HELD": [
       "reason",
       "observed_at"
+    ],
+    "FOLLOWUP_DUE": [
+      "case_id",
+      "session_id",
+      "due_at"
     ],
     "REVIEW_SIGNED": [
       "decision",
