@@ -1,9 +1,13 @@
 {
-  "event_id": "092601-002-sample-001",
+  "event_id": "evt-00000001",
   "event_type": "CONSENT_RECORDED",
   "aggregate_type": "patient_consent",
-  "aggregate_id": "neuro_rehab-001",
+  "aggregate_id": "patient-001",
   "occurred_at": "2026-09-25T10:00:00+08:00",
   "version": 1,
-  "payload": {}
+  "payload": {
+    "patient_id": "patient-001",
+    "recorded_by": "therapist-01",
+    "scope": "training"
+  }
 }

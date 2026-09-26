@@ -20,10 +20,24 @@
       "type": "string",
       "enum": [
         "CONSENT_RECORDED",
+        "CONSENT_WITHDRAWN",
         "PROFILE_APPROVED",
+        "DEVICE_STATUS_REPORTED",
+        "STAFF_REGISTERED",
+        "VENUE_REGISTERED",
+        "VENUE_CONDITION_RECORDED",
+        "BASELINE_RECORDED",
+        "BOOKING_PLACED",
+        "THERAPIST_APPROVAL_RECORDED",
+        "SESSION_DECIDED",
         "SESSION_HELD",
-        "REVIEW_SIGNED",
-        "FOLLOWUP_DUE"
+        "PAUSE_RECORDED",
+        "RESUME_CONFIRMED",
+        "SUMMARY_INGESTED",
+        "SUMMARY_QUARANTINED",
+        "REVIEW_SCHEDULED",
+        "FOLLOWUP_DUE",
+        "REVIEW_SIGNED"
       ]
     },
     "aggregate_type": {
@@ -31,6 +45,8 @@
       "enum": [
         "patient_consent",
         "device_profile",
+        "staff_profile",
+        "venue_profile",
         "training_case",
         "safety_review"
       ]
@@ -52,15 +68,102 @@
     }
   },
   "payload_required_by_event": {
+    "CONSENT_RECORDED": [
+      "patient_id",
+      "recorded_by"
+    ],
+    "CONSENT_WITHDRAWN": [
+      "patient_id",
+      "withdrawn_by"
+    ],
     "PROFILE_APPROVED": [
+      "device_id",
       "device_revision",
+      "decoder_version",
       "reviewer_id"
     ],
+    "DEVICE_STATUS_REPORTED": [
+      "device_id",
+      "reporter_id",
+      "status"
+    ],
+    "STAFF_REGISTERED": [
+      "staff_id",
+      "roles",
+      "registered_by"
+    ],
+    "VENUE_REGISTERED": [
+      "venue_id",
+      "capacity"
+    ],
+    "VENUE_CONDITION_RECORDED": [
+      "venue_id",
+      "condition",
+      "recorded_by"
+    ],
+    "BASELINE_RECORDED": [
+      "patient_id",
+      "baseline_version",
+      "recorded_by"
+    ],
+    "BOOKING_PLACED": [
+      "booking_id",
+      "patient_id",
+      "therapist_id",
+      "venue_id",
+      "device_id",
+      "start",
+      "end"
+    ],
+    "THERAPIST_APPROVAL_RECORDED": [
+      "booking_id",
+      "therapist_id"
+    ],
+    "SESSION_DECIDED": [
+      "booking_id",
+      "patient_id",
+      "decision",
+      "gates"
+    ],
     "SESSION_HELD": [
+      "booking_id",
       "reason",
       "observed_at"
     ],
+    "PAUSE_RECORDED": [
+      "patient_id",
+      "pause_id",
+      "paused_by",
+      "reason"
+    ],
+    "RESUME_CONFIRMED": [
+      "patient_id",
+      "pause_id",
+      "confirmed_by"
+    ],
+    "SUMMARY_INGESTED": [
+      "session_id",
+      "summary_version",
+      "fingerprint"
+    ],
+    "SUMMARY_QUARANTINED": [
+      "session_id",
+      "summary_version",
+      "fingerprint",
+      "conflict_with"
+    ],
+    "REVIEW_SCHEDULED": [
+      "review_id",
+      "patient_id",
+      "due_at"
+    ],
+    "FOLLOWUP_DUE": [
+      "review_id",
+      "patient_id",
+      "due_at"
+    ],
     "REVIEW_SIGNED": [
+      "review_id",
       "decision",
       "reviewer_id"
     ]
