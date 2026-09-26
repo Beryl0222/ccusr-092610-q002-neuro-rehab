@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "脑控康复安全决策账领域事件",
+  "type": "object",
+  "required": [
+    "event_id",
+    "event_type",
+    "aggregate_type",
+    "aggregate_id",
+    "occurred_at",
+    "version",
+    "payload"
+  ],
+  "properties": {
+    "event_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "CONSENT_RECORDED",
+        "PROFILE_APPROVED",
+        "SESSION_HELD",
+        "REVIEW_SIGNED",
+        "FOLLOWUP_DUE"
+      ]
+    },
+    "aggregate_type": {
+      "type": "string",
+      "enum": [
+        "patient_consent",
+        "device_profile",
+        "training_case",
+        "safety_review"
+      ]
+    },
+    "aggregate_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "occurred_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "version": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "payload": {
+      "type": "object"
+    }
+  },
+  "payload_required_by_event": {
+    "PROFILE_APPROVED": [
+      "device_revision",
+      "reviewer_id"
+    ],
+    "SESSION_HELD": [
+      "reason",
+      "observed_at"
+    ],
+    "REVIEW_SIGNED": [
+      "decision",
+      "reviewer_id"
+    ]
+  },
+  "additionalProperties": false
+}
